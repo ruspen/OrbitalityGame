@@ -1,0 +1,39 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+.vs/
+*.svd
+*.userprefs
+*.sln
+*.csproj
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+
+# ============ #
+# OS generated #
+# ============ #
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+
