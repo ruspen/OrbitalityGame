@@ -4,6 +4,8 @@ using UnityEngine;
 using Orbitality.GameModule.SunModule;
 using Orbitality.GameModule.PlanetModule;
 using Orbitality.UtilitiesModule;
+using System;
+using UnityEngine.UIElements;
 
 namespace Orbitality.GameModule
 {
@@ -22,9 +24,9 @@ namespace Orbitality.GameModule
         public void StartGame()
         {
             sunController = Instantiate(Resources.Load<SunController>(SunModule.GameData.SUN_PREFAB_PATH));
-            string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
+            string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[UnityEngine.Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
             mainPlanetController = Instantiate(Resources.Load<PlanetController>(planetPath));
-            mainPlanetController.Init();
+            mainPlanetController.Init((RocketType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(RocketType)).Length -1));
             mainPlanetController.StartMove(orbitCreator.GetFreeOrbit());
         }
 

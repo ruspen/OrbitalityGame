@@ -7,10 +7,11 @@ namespace Orbitality.GameModule.PlanetModule
 {
     public interface IPlanetController
     {
-        void Init();
+        void Init(RocketType rocketType);
         void StartMove(EllipseData ellipseData);
         void Pause();
         void Play();
+        void Attack();
     }
 }
 

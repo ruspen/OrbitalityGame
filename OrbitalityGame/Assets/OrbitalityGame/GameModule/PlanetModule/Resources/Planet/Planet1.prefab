@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6061824086041281920, guid: 1e690aff38244084fa8e2ee57e4a5731,
+        type: 3}
+      propertyPath: planetSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7459413016736499728, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -65,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 7459413016736499729, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: m_Name
-      value: Planet
+      value: Planet1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e690aff38244084fa8e2ee57e4a5731, type: 3}

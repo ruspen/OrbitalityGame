@@ -13,6 +13,11 @@ namespace Orbitality.GameModule.PlanetModule
             "Planet/Planet3",
             "Planet/Planet4"
         };
+
+        public static string ROCKET_PREFAB_PATH = "Rocket/Rocket";
+        public static string ROCKET0_SPRITE_PATH = "Rocket/RocketImageType0";
+        public static string ROCKET1_SPRITE_PATH = "Rocket/RocketImageType1";
+        public static string ROCKET2_SPRITE_PATH = "Rocket/RocketImageType2";
     }
 }
 

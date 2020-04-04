@@ -19,11 +19,13 @@ namespace Orbitality.GameModule.PlanetModule
         private int startPositionAtWay = 0;
 
         private int currentPointAtWay;
+        private int previousPointAtWay;
         private Ellipse ellipseHelper;
-        
+        private RocketType rocketType;
 
-        public void Init()
+        public void Init(RocketType rocketType)
         {
+            this.rocketType = rocketType;
             ellipseHelper = new Ellipse();
         }
 
@@ -31,6 +33,7 @@ namespace Orbitality.GameModule.PlanetModule
         {
             this.wayPositions = ellipseHelper.GetEllipsePositions(ellipseData);
             this.startPositionAtWay = UnityEngine.Random.Range(0, wayPositions.Length);
+            previousPointAtWay = startPositionAtWay;
             currentPointAtWay = AddPointAtWay(wayPositions, startPositionAtWay);
             transform.position = wayPositions[startPositionAtWay];
             Play();
@@ -46,6 +49,12 @@ namespace Orbitality.GameModule.PlanetModule
             SimpleUpdate += MovePlanet;
         }
 
+        public void Attack()
+        {
+            
+        }
+
+
         private void Update()
         {
             SimpleUpdate?.Invoke();
@@ -56,9 +65,12 @@ namespace Orbitality.GameModule.PlanetModule
         {
             if (Vector3.Distance(transform.position, wayPositions[currentPointAtWay]) < maxDistanceToPoint)
             {
+                previousPointAtWay = currentPointAtWay;
                 currentPointAtWay = currentPointAtWay = AddPointAtWay(wayPositions, currentPointAtWay);
             }
-            transform.position = Vector3.MoveTowards(transform.position, wayPositions[currentPointAtWay], Time.deltaTime * planetSpeed);
+            float coefSpeedByPoints = Vector3.Distance(wayPositions[previousPointAtWay], wayPositions[currentPointAtWay]);
+            Debug.Log(coefSpeedByPoints);
+            transform.position = Vector3.MoveTowards(transform.position, wayPositions[currentPointAtWay], Time.deltaTime * planetSpeed  * coefSpeedByPoints);
         }
 
         private int AddPointAtWay(Vector3[] way, int currentPoint)
@@ -72,7 +84,6 @@ namespace Orbitality.GameModule.PlanetModule
                 return currentPoint + 1;
             }
         }
-
     }
 }
 
