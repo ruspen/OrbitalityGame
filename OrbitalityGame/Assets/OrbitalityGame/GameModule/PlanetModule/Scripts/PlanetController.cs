@@ -2,31 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Orbitality.UtilitiesModule;
 
 namespace Orbitality.GameModule.PlanetModule
 {
     public class PlanetController : MonoBehaviour, IPlanetController
     {
+        [SerializeField]
+        private float planetSpeed = 1f;
+
         private event Action SimpleUpdate;
 
-        private float maxDistanceToPoint = 0.1f;
+        private float maxDistanceToPoint = 0.01f;
 
         private Vector3[] wayPositions;
         private int startPositionAtWay = 0;
-        private float moveSpeed;
+
         private int currentPointAtWay;
+        private Ellipse ellipseHelper;
         
 
         public void Init()
         {
-            
+            ellipseHelper = new Ellipse();
         }
 
-        public void StartMove(Vector3[] way, int startPositionAtWay, float moveSpeed)
+        public void StartMove(EllipseData ellipseData)
         {
-            this.wayPositions = way;
-            this.startPositionAtWay = startPositionAtWay;
-            this.moveSpeed = moveSpeed;
+            this.wayPositions = ellipseHelper.GetEllipsePositions(ellipseData);
+            this.startPositionAtWay = UnityEngine.Random.Range(0, wayPositions.Length);
             currentPointAtWay = AddPointAtWay(wayPositions, startPositionAtWay);
             transform.position = wayPositions[startPositionAtWay];
             Play();
@@ -54,7 +58,7 @@ namespace Orbitality.GameModule.PlanetModule
             {
                 currentPointAtWay = currentPointAtWay = AddPointAtWay(wayPositions, currentPointAtWay);
             }
-            transform.position = Vector3.MoveTowards(transform.position, wayPositions[currentPointAtWay], Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, wayPositions[currentPointAtWay], Time.deltaTime * planetSpeed);
         }
 
         private int AddPointAtWay(Vector3[] way, int currentPoint)

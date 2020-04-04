@@ -15,8 +15,11 @@ namespace Orbitality.UtilitiesModule
         //public float xAxis = 5f;
         //public float yAxis = 3f;
         
-        public Vector3[] GetEllipsePositions(int segments, float xAxis, float yAxis)
+        public Vector3[] GetEllipsePositions(EllipseData ellipseData)
         {
+            int segments = ellipseData.Segments;
+            float xAxis = ellipseData.XAxis;
+            float yAxis = ellipseData.YAxis;
             Vector3[] points = new Vector3[segments + 1];
             for (int i = 0; i < segments; i++)
             {
@@ -50,6 +53,13 @@ namespace Orbitality.UtilitiesModule
         //{
         //    CalculateElipse();
         //}
+    }
+
+    public struct EllipseData
+    {
+        public int Segments;
+        public float XAxis;
+        public float YAxis;
     }
 }
 

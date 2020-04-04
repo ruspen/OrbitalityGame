@@ -9,6 +9,10 @@ namespace Orbitality.GameModule
 {
     public class GameController : MonoBehaviour, IGameController
     {
+        private OrbitCreator orbitCreator = new OrbitCreator();
+        private SunController sunController;
+        private IPlanetController mainPlanetController;
+        private List<IPlanetController> otherPlanetsController;
 
         public void Init()
         {
@@ -17,7 +21,11 @@ namespace Orbitality.GameModule
 
         public void StartGame()
         {
-            
+            sunController = Instantiate(Resources.Load<SunController>(SunModule.GameData.SUN_PREFAB_PATH));
+            string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
+            mainPlanetController = Instantiate(Resources.Load<PlanetController>(planetPath));
+            mainPlanetController.Init();
+            mainPlanetController.StartMove(orbitCreator.GetFreeOrbit());
         }
 
         public void Play()
