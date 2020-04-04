@@ -10,12 +10,12 @@ namespace Orbitality.SceneModules.MainMenu
 
         public void StartGameButtonClick()
         {
-            OnStartGameButtonClick.Invoke();
+            OnStartGameButtonClick?.Invoke();
         }
 
         public void LoadGameButtonClick()
         {
-            OnLoadGameButtonClick.Invoke();
+            OnLoadGameButtonClick?.Invoke();
         }
     }
 }

@@ -1,18 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Orbitality.GameModule.SunModule;
+using Orbitality.GameModule.PlanetModule;
+using Orbitality.UtilitiesModule;
 
-public class GameController : MonoBehaviour
+namespace Orbitality.GameModule
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameController : MonoBehaviour, IGameController
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Init()
+        {
+            
+        }
+
+        public void StartGame()
+        {
+            
+        }
+
+        public void Play()
+        {
+            
+        }
+
+        public void Pause()
+        {
+            
+        }
+
+
+        public void EndGame()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
+

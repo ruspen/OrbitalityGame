@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Orbitality.GameModule
+namespace Orbitality.GameModule.PlanetModule
 {
-    public interface IGameController
+    public interface IPlanetController
     {
         void Init();
-        void StartGame();
+        void StartMove(Vector3[] way, int startPositionAtWay, float speed);
         void Pause();
         void Play();
-        void EndGame();
-
     }
 }
 
