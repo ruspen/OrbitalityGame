@@ -14,12 +14,31 @@ namespace Orbitality.SceneModules.Game
 
         void Start()
         {
+            uiController.OnBackClick += BackGame;
+            uiController.OnPauseClick += PauseGame;
+            uiController.OnPlayClick += PlayGame;
             gameController.Init();
             gameController.StartGame();
         }
 
         
         void Update()
+        {
+
+        }
+
+
+        private void PauseGame()
+        {
+            Time.timeScale = 0;
+        }
+
+        private void PlayGame()
+        {
+            Time.timeScale = 1;
+        }
+
+        private void BackGame()
         {
 
         }

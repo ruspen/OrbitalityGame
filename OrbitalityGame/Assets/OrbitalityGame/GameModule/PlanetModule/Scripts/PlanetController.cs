@@ -11,11 +11,12 @@ namespace Orbitality.GameModule.PlanetModule
 
         public event Action<float> OnHealthChanged;
         public event Action OnDied;
+        public event Action SimpleUpdate;
+
+        public GameObject MainParticle;
 
         [SerializeField]
         private float planetSpeed = 0.1f;
-
-        private event Action SimpleUpdate;
 
         private float currentHealth;
         private float maxDistanceToPoint = 0.001f;
@@ -29,8 +30,12 @@ namespace Orbitality.GameModule.PlanetModule
         private RocketCharacteristics rocketCharacteristics;
         private List<RocketProjectile> rockets = new List<RocketProjectile>();
 
-        public void Init(RocketType rocketType)
+        public void Init(RocketType rocketType, bool isMain = false)
         {
+            if (isMain)
+            {
+                MainParticle.SetActive(true);
+            }
             currentHealth = GameData.PLANET_MAX_HEALTH;
             this.rocketType = rocketType;
             rocketCharacteristics = rocketData.GetCharacteristics(rocketType);

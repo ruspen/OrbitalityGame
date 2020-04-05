@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1663839227126232951, guid: 1e690aff38244084fa8e2ee57e4a5731,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59b2dd20138ab9e4a8c754e99c662f50, type: 2}
     - target: {fileID: 6061824086041281920, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: planetSpeed
@@ -70,17 +75,17 @@ PrefabInstance:
     - target: {fileID: 7459413016736499728, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.8
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 7459413016736499728, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.8
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 7459413016736499728, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.8
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 7459413016736499729, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}

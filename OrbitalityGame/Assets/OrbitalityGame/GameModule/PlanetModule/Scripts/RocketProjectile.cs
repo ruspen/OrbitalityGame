@@ -74,7 +74,7 @@ namespace Orbitality.GameModule.PlanetModule
             Debug.DrawRay(transform.position, newDirection, Color.red);
             transform.rotation = Quaternion.LookRotation(newDirection);
 
-            transform.Translate(Vector3.forward/150 * speed);
+            transform.Translate(Vector3.forward/150 * speed * Time.deltaTime * 100);
         }
     }
 }

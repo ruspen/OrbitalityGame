@@ -11,6 +11,8 @@ namespace Orbitality.GameModule.GameUIModule
         event Action onClickRocketButton;
         void Init(float maxHealth, RocketType rocketType);
         void ChangeHealth(float currentHealth);
+        void AddBotHealth(int botID, float maxValue);
+        void ChangeBotHealth(int botID, float currentHealth);
 
     }
 }

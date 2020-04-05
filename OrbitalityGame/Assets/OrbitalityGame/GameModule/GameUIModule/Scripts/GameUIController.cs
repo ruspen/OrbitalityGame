@@ -14,12 +14,17 @@ namespace Orbitality.GameModule.GameUIModule
         [SerializeField]
         private Slider healthBarSlider;
         [SerializeField]
-        private Button RocketButton;
+        private Button rocketButton;
         [SerializeField]
-        private Image RocketImageButton;
+        private Image rocketImageButton;
+        [SerializeField]
+        private Transform botsPanel;
+        [SerializeField]
+        private Slider botHealthBarPfefab;
 
         private float countdown;
         private event Action update;
+        private Dictionary<int, Slider> botsHealth = new Dictionary<int, Slider>();
 
 
         public void Init(float maxHealth, RocketType rocketType)
@@ -27,8 +32,8 @@ namespace Orbitality.GameModule.GameUIModule
             RocketData rocketData = new RocketData();
             RocketCharacteristics rocketCharacteristics = rocketData.GetCharacteristics(rocketType);
             countdown = rocketCharacteristics.Cooldown;
-            RocketImageButton.sprite = rocketCharacteristics.sprite;
-            RocketButton.onClick.AddListener(ClickRocketButton);
+            rocketImageButton.sprite = rocketCharacteristics.sprite;
+            rocketButton.onClick.AddListener(ClickRocketButton);
             healthBarSlider.maxValue = maxHealth;
             healthBarSlider.value = maxHealth;
         }
@@ -48,23 +53,39 @@ namespace Orbitality.GameModule.GameUIModule
         private void ClickRocketButton()
         {
             onClickRocketButton?.Invoke();
-            RocketImageButton.fillAmount = 0;
-            RocketButton.interactable = false;
+            rocketImageButton.fillAmount = 0;
+            rocketButton.interactable = false;
             update += Countdown;
         }
 
         private void Countdown()
         {
-            if (RocketImageButton.fillAmount < 1)
+            if (rocketImageButton.fillAmount < 1)
             {
-                RocketImageButton.fillAmount += Time.deltaTime / countdown;
+                rocketImageButton.fillAmount += Time.deltaTime / countdown;
             }
             else
             {
                 update -= Countdown;
-                RocketButton.interactable = true;
-                RocketImageButton.fillAmount = 1;
+                rocketButton.interactable = true;
+                rocketImageButton.fillAmount = 1;
 
+            }
+        }
+
+        public void AddBotHealth(int botID,float maxValue)
+        {
+            Slider slider = Instantiate(botHealthBarPfefab, botsPanel) as Slider;
+            slider.maxValue = maxValue;
+            slider.value = maxValue;
+            botsHealth.Add(botID, slider);
+        }
+
+        public void ChangeBotHealth(int botID, float currentHealth)
+        {
+            if (botsHealth.ContainsKey(botID))
+            {
+                botsHealth[botID].value = currentHealth;
             }
         }
     }

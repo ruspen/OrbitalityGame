@@ -10,7 +10,8 @@ namespace Orbitality.GameModule.PlanetModule
     {
         event Action<float> OnHealthChanged;
         event Action OnDied;
-        void Init(RocketType rocketType);
+        event Action SimpleUpdate;
+        void Init(RocketType rocketType, bool isMain = false);
         void StartMove(EllipseData ellipseData);
         void Pause();
         void Play();

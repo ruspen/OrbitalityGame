@@ -16,7 +16,7 @@ namespace Orbitality.GameModule
         private OrbitCreator orbitCreator = new OrbitCreator();
         private SunController sunController;
         private IPlanetController mainPlanetController;
-        private List<IAIBotController> bots = new List<IAIBotController>();
+        private Dictionary<int, IAIBotController> bots = new Dictionary<int, IAIBotController>();
         private IGameUIController gameUIController;
         private RocketType mainRocketType;
 
@@ -30,7 +30,7 @@ namespace Orbitality.GameModule
             sunController = Instantiate(Resources.Load<SunController>(SunModule.GameData.SUN_PREFAB_PATH));
             CreateBots(1);
             CreateMainPlanet();
-            CreateBots(3);
+            CreateBots(UnityEngine.Random.Range(GameData.MIN_BOTS, GameData.MAX_BOTS));
             CreateGameUI();
         }
 
@@ -43,7 +43,6 @@ namespace Orbitality.GameModule
         {
             
         }
-
 
         public void EndGame()
         {
@@ -60,7 +59,7 @@ namespace Orbitality.GameModule
             string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[UnityEngine.Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
             mainPlanetController = Instantiate(Resources.Load<PlanetController>(planetPath));
             mainRocketType = (RocketType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(RocketType)).Length);
-            mainPlanetController.Init(mainRocketType);
+            mainPlanetController.Init(mainRocketType, true);
             mainPlanetController.StartMove(orbitCreator.GetFreeOrbit());
         }
 
@@ -74,8 +73,13 @@ namespace Orbitality.GameModule
                 planetController.Init(mainRocketType);
                 planetController.StartMove(orbitCreator.GetFreeOrbit());
                 IAIBotController bot = new AIBotController();
-                bot.Init(planetController);
-                bots.Add(bot);
+                bot.Init(bots.Count, planetController);
+                bots.Add(bots.Count, bot);
+                bot.OnDied += (id) =>
+                {
+                    bots.Remove(id);
+                    SomeoneDie();
+                };
             }
         }
 
@@ -85,6 +89,20 @@ namespace Orbitality.GameModule
             gameUIController.Init(100, mainRocketType);
             gameUIController.onClickRocketButton += mainPlanetController.Attack;
             mainPlanetController.OnHealthChanged += gameUIController.ChangeHealth;
+            foreach (var bot in bots)
+            {
+                gameUIController.AddBotHealth(bot.Key, PlanetModule.GameData.PLANET_MAX_HEALTH);
+                bot.Value.OnChangeHealth += gameUIController.ChangeBotHealth;
+            }
+        }
+
+        private void SomeoneDie()
+        {
+            Debug.Log($"Someone Die Now we have {bots.Count} bots");
+            if (bots.Count == 0)
+            {
+                EndGame();
+            }
         }
     }
 }

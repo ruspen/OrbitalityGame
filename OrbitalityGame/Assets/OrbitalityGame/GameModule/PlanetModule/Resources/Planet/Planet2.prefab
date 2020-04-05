@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1663839227126232951, guid: 1e690aff38244084fa8e2ee57e4a5731,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c0e031cc20eb9247b70eff7628cacd0, type: 2}
     - target: {fileID: 6061824086041281920, guid: 1e690aff38244084fa8e2ee57e4a5731,
         type: 3}
       propertyPath: planetSpeed
