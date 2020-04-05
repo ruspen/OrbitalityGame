@@ -10,7 +10,7 @@ namespace Orbitality.GameModule
     {
         public List<EllipseData> OrbitsData { get; private set; } = new List<EllipseData>();
 
-        private float orbitMagnificationFactor = 1.5f;
+        private float orbitMagnificationFactor = 1.3f;
         private EllipseData orbitDefault = new EllipseData
         {
             Segments = 36,

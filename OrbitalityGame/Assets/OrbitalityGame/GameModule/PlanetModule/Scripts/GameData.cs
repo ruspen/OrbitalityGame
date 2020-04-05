@@ -6,6 +6,8 @@ namespace Orbitality.GameModule.PlanetModule
 {
     public class GameData
     {
+        public static float PLANET_MAX_HEALTH = 100;
+
         public static List<string> PLANETS_PREFAB_PATH = new List<string>
         {
             "Planet/Planet1",

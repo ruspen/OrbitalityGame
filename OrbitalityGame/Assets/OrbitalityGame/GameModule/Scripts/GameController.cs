@@ -6,6 +6,8 @@ using Orbitality.GameModule.PlanetModule;
 using Orbitality.UtilitiesModule;
 using System;
 using UnityEngine.UIElements;
+using Orbitality.GameModule.GameUIModule;
+using Orbitality.GameModule.AIBotModule;
 
 namespace Orbitality.GameModule
 {
@@ -14,7 +16,9 @@ namespace Orbitality.GameModule
         private OrbitCreator orbitCreator = new OrbitCreator();
         private SunController sunController;
         private IPlanetController mainPlanetController;
-        private List<IPlanetController> otherPlanetsController;
+        private List<IAIBotController> bots = new List<IAIBotController>();
+        private IGameUIController gameUIController;
+        private RocketType mainRocketType;
 
         public void Init()
         {
@@ -24,10 +28,10 @@ namespace Orbitality.GameModule
         public void StartGame()
         {
             sunController = Instantiate(Resources.Load<SunController>(SunModule.GameData.SUN_PREFAB_PATH));
-            string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[UnityEngine.Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
-            mainPlanetController = Instantiate(Resources.Load<PlanetController>(planetPath));
-            mainPlanetController.Init((RocketType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(RocketType)).Length -1));
-            mainPlanetController.StartMove(orbitCreator.GetFreeOrbit());
+            CreateBots(1);
+            CreateMainPlanet();
+            CreateBots(3);
+            CreateGameUI();
         }
 
         public void Play()
@@ -46,6 +50,42 @@ namespace Orbitality.GameModule
             throw new System.NotImplementedException();
         }
 
+        public void SaveGame()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CreateMainPlanet()
+        {
+            string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[UnityEngine.Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
+            mainPlanetController = Instantiate(Resources.Load<PlanetController>(planetPath));
+            mainRocketType = (RocketType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(RocketType)).Length);
+            mainPlanetController.Init(mainRocketType);
+            mainPlanetController.StartMove(orbitCreator.GetFreeOrbit());
+        }
+
+        private void CreateBots(int count)
+        {
+            IPlanetController planetController;
+            for (int i = 0; i < count; i++)
+            {
+                string planetPath = PlanetModule.GameData.PLANETS_PREFAB_PATH[UnityEngine.Random.Range(0, PlanetModule.GameData.PLANETS_PREFAB_PATH.Count)];
+                planetController = Instantiate(Resources.Load<PlanetController>(planetPath));
+                planetController.Init(mainRocketType);
+                planetController.StartMove(orbitCreator.GetFreeOrbit());
+                IAIBotController bot = new AIBotController();
+                bot.Init(planetController);
+                bots.Add(bot);
+            }
+        }
+
+        private void CreateGameUI()
+        {
+            gameUIController = Instantiate(Resources.Load<GameUIController>(GameUIModule.GameData.GAMEUICANVAS_PATH));
+            gameUIController.Init(100, mainRocketType);
+            gameUIController.onClickRocketButton += mainPlanetController.Attack;
+            mainPlanetController.OnHealthChanged += gameUIController.ChangeHealth;
+        }
     }
 }
 

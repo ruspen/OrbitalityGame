@@ -21,6 +21,7 @@ namespace Orbitality.GameModule.GameUIModule
         private float countdown;
         private event Action update;
 
+
         public void Init(float maxHealth, RocketType rocketType)
         {
             RocketData rocketData = new RocketData();
@@ -29,6 +30,7 @@ namespace Orbitality.GameModule.GameUIModule
             RocketImageButton.sprite = rocketCharacteristics.sprite;
             RocketButton.onClick.AddListener(ClickRocketButton);
             healthBarSlider.maxValue = maxHealth;
+            healthBarSlider.value = maxHealth;
         }
 
         public void ChangeHealth(float currentHealth)
@@ -60,10 +62,10 @@ namespace Orbitality.GameModule.GameUIModule
             else
             {
                 update -= Countdown;
+                RocketButton.interactable = true;
+                RocketImageButton.fillAmount = 1;
 
             }
-            RocketButton.interactable = true;
-            RocketImageButton.fillAmount = 1;
         }
     }
 }

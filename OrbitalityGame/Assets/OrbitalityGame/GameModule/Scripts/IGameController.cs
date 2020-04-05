@@ -10,6 +10,7 @@ namespace Orbitality.GameModule
         void StartGame();
         void Pause();
         void Play();
+        void SaveGame();
         void EndGame();
 
     }
