@@ -13,6 +13,7 @@ namespace Orbitality.GameModule.GameUIModule
         void ChangeHealth(float currentHealth);
         void AddBotHealth(int botID, float maxValue);
         void ChangeBotHealth(int botID, float currentHealth);
+        void TurnOfRocketButton();
 
     }
 }

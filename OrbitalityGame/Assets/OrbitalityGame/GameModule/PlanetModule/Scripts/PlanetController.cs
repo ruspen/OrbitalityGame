@@ -30,13 +30,13 @@ namespace Orbitality.GameModule.PlanetModule
         private RocketCharacteristics rocketCharacteristics;
         private List<RocketProjectile> rockets = new List<RocketProjectile>();
 
-        public void Init(RocketType rocketType, bool isMain = false)
+        public void Init(RocketType rocketType, float currentHealth, bool isMain = false)
         {
             if (isMain)
             {
                 MainParticle.SetActive(true);
             }
-            currentHealth = GameData.PLANET_MAX_HEALTH;
+            this.currentHealth = currentHealth;
             this.rocketType = rocketType;
             rocketCharacteristics = rocketData.GetCharacteristics(rocketType);
             ellipseHelper = new Ellipse();
@@ -99,6 +99,11 @@ namespace Orbitality.GameModule.PlanetModule
         public RocketCharacteristics GetRocketCharacteristics()
         {
             return rocketCharacteristics;
+        }
+
+        public void Delete()
+        {
+            Destroy(this.gameObject);
         }
 
 

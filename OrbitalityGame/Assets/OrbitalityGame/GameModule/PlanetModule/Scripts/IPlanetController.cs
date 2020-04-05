@@ -11,7 +11,7 @@ namespace Orbitality.GameModule.PlanetModule
         event Action<float> OnHealthChanged;
         event Action OnDied;
         event Action SimpleUpdate;
-        void Init(RocketType rocketType, bool isMain = false);
+        void Init(RocketType rocketType, float currentHealth, bool isMain = false);
         void StartMove(EllipseData ellipseData);
         void Pause();
         void Play();
@@ -19,6 +19,7 @@ namespace Orbitality.GameModule.PlanetModule
         void TakeDamage(float points);
         float GetHeath();
         RocketCharacteristics GetRocketCharacteristics();
+        void Delete();
 
     }
 }

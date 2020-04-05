@@ -19,6 +19,13 @@ namespace Orbitality.SceneModules.Game
         private Sprite pauseSprite;
         [SerializeField]
         private Sprite playSprite;
+        [Header("Inform Panel")]
+        [SerializeField]
+        private GameObject informPanel;
+        [SerializeField]
+        private GameObject winOgject;
+        [SerializeField]
+        private GameObject loseObject;
 
         private bool isPause = false;
 
@@ -37,14 +44,6 @@ namespace Orbitality.SceneModules.Game
                 OnPauseClick?.Invoke();
                 pausePlayButtonImage.sprite = playSprite;
             }
-            //if (Time.timeScale == 1)
-            //{
-            //    Time.timeScale = 0;
-            //}
-            //else
-            //{
-            //    Time.timeScale = 1;
-            //}
             
         }
 
@@ -53,15 +52,20 @@ namespace Orbitality.SceneModules.Game
             OnBackClick?.Invoke();
         }
 
+        public void ShowWin()
+        {
+            informPanel.SetActive(true);
+            winOgject.SetActive(true);
+        }
+        public void ShowLose()
+        {
+            informPanel.SetActive(true);
+            loseObject.SetActive(true);
+        }
+
         void Start()
         {
             pausePlayButtonImage.sprite = pauseSprite;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
         
 

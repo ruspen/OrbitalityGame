@@ -8,6 +8,7 @@ namespace Orbitality.GameModule
     {
         public static int MAX_BOTS = 4;
         public static int MIN_BOTS = 1;
+        public static bool LOAD_GAME = false;
     }
 }
 

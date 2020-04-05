@@ -66,7 +66,7 @@ namespace Orbitality.GameModule.PlanetModule
             }
             if (Vector3.Distance(transform.position, Vector3.zero) <= 2.5f)
             {
-                gravity *= 2;
+                gravity *= 1.5f;
             }
             Vector3 targetDirection = Vector3.zero - transform.position;
             float singleStep = gravity * Time.deltaTime;

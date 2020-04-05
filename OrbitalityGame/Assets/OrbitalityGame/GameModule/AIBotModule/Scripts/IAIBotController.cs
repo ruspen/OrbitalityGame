@@ -11,9 +11,8 @@ namespace Orbitality.GameModule.AIBotModule
         int ID { get;}
         event Action<int> OnDied;
         event Action<int, float> OnChangeHealth;
-        void Init(int id, IPlanetController planetController);
-        void Pause();
-        void Play();
+        void Init(int id, IPlanetController planetController, int planetID, int rocketID);
+        CharacterParameters GetCharacterParameters();
     }
 }
 

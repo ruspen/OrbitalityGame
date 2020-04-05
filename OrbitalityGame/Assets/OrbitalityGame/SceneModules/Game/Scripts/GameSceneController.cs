@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Orbitality.GameModule;
+using UnityEngine.SceneManagement;
 
 namespace Orbitality.SceneModules.Game
 {
@@ -10,6 +11,7 @@ namespace Orbitality.SceneModules.Game
         [SerializeField]
         private GameSceneUIController uiController;
 
+        private bool endGame = false;
         private IGameController gameController = new GameController();
 
         void Start()
@@ -18,6 +20,8 @@ namespace Orbitality.SceneModules.Game
             uiController.OnPauseClick += PauseGame;
             uiController.OnPlayClick += PlayGame;
             gameController.Init();
+            gameController.OnWin += Win;
+            gameController.OnLose += Lose;
             gameController.StartGame();
         }
 
@@ -40,8 +44,25 @@ namespace Orbitality.SceneModules.Game
 
         private void BackGame()
         {
-
+            if (!endGame)
+            {
+                gameController.SaveGame();
+            }
+            SceneManager.LoadScene(GlobalModule.GameData.MAINMENU_SCENE_NAME);
         }
+
+        private void Win()
+        {
+            uiController.ShowWin();
+            endGame = true;
+        }
+
+        private void Lose()
+        {
+            uiController.ShowLose();
+            endGame = true;
+        }
+
     }
 }
 

@@ -12,6 +12,7 @@ namespace Orbitality.SceneModules.MainMenu
         void Start()
         {
             Subscribe();
+            CheckSaveGame();
         }
 
 
@@ -39,7 +40,20 @@ namespace Orbitality.SceneModules.MainMenu
 
         private void LoadGame()
         {
+            GameModule.GameData.LOAD_GAME = true;
+            StartGame();
+        }
 
+        private void CheckSaveGame()
+        {
+            if (PlayerPrefs.HasKey(GlobalModule.GameData.PPKEY_HAS_SAVE) && PlayerPrefs.GetString(GlobalModule.GameData.PPKEY_HAS_SAVE) == "true")
+            {
+                mainMenuUIController.ChangeLoadInteractable(true);
+            }
+            else
+            {
+                mainMenuUIController.ChangeLoadInteractable(false);
+            }
         }
     }
 }

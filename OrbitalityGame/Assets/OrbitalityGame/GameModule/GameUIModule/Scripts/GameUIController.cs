@@ -43,6 +43,11 @@ namespace Orbitality.GameModule.GameUIModule
             healthBarSlider.value = currentHealth;
         }
 
+        public void TurnOfRocketButton()
+        {
+            rocketButton.gameObject.SetActive(false);
+        }
+
 
         private void Update()
         {

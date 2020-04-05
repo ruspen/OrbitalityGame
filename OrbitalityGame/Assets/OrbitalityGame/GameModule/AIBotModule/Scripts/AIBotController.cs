@@ -16,11 +16,15 @@ namespace Orbitality.GameModule.AIBotModule
         private IPlanetController planetController;
         private float cooldown;
         private float time = 0;
+        private int planetID;
+        private int rocketID;
 
 
-        public void Init(int id, IPlanetController planetController)
+        public void Init(int id, IPlanetController planetController, int planetID, int rocketID)
         {
             this.ID = id;
+            this.planetID = planetID;
+            this.rocketID = rocketID;
             this.planetController = planetController;
             rocketCharacteristics = planetController.GetRocketCharacteristics();
             cooldown = rocketCharacteristics.Cooldown;
@@ -31,21 +35,16 @@ namespace Orbitality.GameModule.AIBotModule
             planetController.OnHealthChanged += ChangeHealth;
             
             planetController.SimpleUpdate += Update;
+            //planetController.TakeDamage(0);
         }
 
-        public void Pause()
+        public CharacterParameters GetCharacterParameters()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Play()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Start()
-        {
-            throw new System.NotImplementedException();
+            CharacterParameters charParam = new CharacterParameters();
+            charParam.Health = planetController.GetHeath();
+            charParam.PlanetID = planetID;
+            charParam.RocketID = rocketID;
+            return charParam;
         }
 
         private void ChangeHealth(float currentHealth)
