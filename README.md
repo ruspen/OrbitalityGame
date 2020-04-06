@@ -12,12 +12,12 @@ Decomposition levels:
 * 2 OrbitalityGame.GameModule.SunModule
 
 ```
- Game save
-The type of planet, type of rockets, lives for the main character and each bot is saved in the game.
+Game save
 
+The type of planet, type of rockets, lives for the main character and each bot is saved in the game.
 It is json at PlayerPrefs
 
- Modules
-Modules communicate with each other only through received events or requested data in initialization.
+Modules
 
+Modules communicate with each other only through received events or requested data in initialization.
 This is done to enable the replacement of modules without extra time
